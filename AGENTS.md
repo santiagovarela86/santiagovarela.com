@@ -1,22 +1,45 @@
-## Development
+# Project instructions
 
-When starting the dev server, use background mode:
+## Purpose and architecture
 
+This repository contains a static personal profile and occasional blog posts built with
+Astro. GitHub pushes to `main` are deployed by Cloudflare Pages.
+
+- Keep the site static. Do not add a backend, database, comments, or contact forms.
+- Preserve the existing date-based article URLs and legacy redirects.
+- Prefer Astro components and content collections over client-side JavaScript.
+
+## Structure
+
+- `src/pages/`: page routes.
+- `src/components/`: shared Astro components.
+- `src/content/blog/`: Markdown blog posts.
+- `src/content.config.ts`: blog frontmatter schema.
+- `public/images/blog/<slug>/`: images belonging to a blog post.
+
+## Development and validation
+
+```sh
+npm install
+npm run dev
+npm run check
+npm run preview
 ```
-astro dev --background
-```
 
-Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
+- `npm run dev` starts the local site at `http://localhost:4321`.
+- `npm run check` validates content and creates the production build in `dist/`.
+- `npm run preview` serves the production build locally.
+- Run `npm run check` after changes. Also inspect affected pages at desktop and mobile
+  widths when making visual changes.
 
-## Documentation
+## Adding a blog post
 
-Full documentation: https://docs.astro.build
+Create `src/content/blog/<slug>.md` using the frontmatter schema and example documented
+in `README.md`. Put its images in `public/images/blog/<slug>/` and reference them as
+`/images/blog/<slug>/<filename>`.
 
-Consult these guides before working on related tasks:
+Keep `draft: true` while a post should remain outside public listings and the sitemap.
 
-- [Adding pages, dynamic routes, or middleware](https://docs.astro.build/en/guides/routing/)
-- [Working with Astro components](https://docs.astro.build/en/basics/astro-components/)
-- [Using React, Vue, Svelte, or other framework components](https://docs.astro.build/en/guides/framework-components/)
-- [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)
-- [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
-- [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)
+## Git conventions
+
+Do not add AI attribution or `Co-Authored-By` trailers to commit messages.

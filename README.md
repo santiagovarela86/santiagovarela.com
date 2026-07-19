@@ -15,7 +15,7 @@ Personal site: profile, contact info, and occasional posts. Built with
 │   ├── content/blog/*.md           # posts
 │   ├── data/projects.ts            # structured project list rendered as cards on /
 │   ├── layouts/BaseLayout.astro    # <head>, meta/OG tags, header/footer
-│   ├── components/Header.astro, Footer.astro, Card.astro, Badge.astro
+│   ├── components/Header.astro, Footer.astro, Card.astro, Badge.astro, ProjectCard.astro
 │   └── pages/
 │       ├── index.astro             # homepage — profile/hero + project cards + posts
 │       └── blog/index.astro, [...slug].astro
@@ -40,7 +40,7 @@ no manual deploy step.
 
 ## Adding a post
 
-Create a new file at `src/content/blog/<slug>.md` (or ask Claude Code to draft one) with
+Create a new file at `src/content/blog/<slug>.md` (or ask an AI coding agent to draft one) with
 this frontmatter:
 
 ```markdown

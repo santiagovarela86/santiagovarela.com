@@ -48,7 +48,7 @@ En azul vemos el Índice de Libertad Económica, en naranja el Coeficiente Gini 
 
 Se observa que a medida que aumenta la libertad económica de un país, el Coeficiente Gini tiende a decrecer, es decir, tiende a disminuir la desigualdad de ingresos de ese país.
 
-En este caso vemos que el coeficiente disminuye de 45 a 35 (una reducción aproximada del 22%) en la desigualdad entre el país con menos libertad económica y el país con mas libertad económica.
+En este caso vemos que el coeficiente disminuye de 45 a 35 (una reducción aproximada del 22%) en la desigualdad entre el país con menos libertad económica y el país con más libertad económica.
 
 Otra forma de analizar si existe alguna correlación entre estos dos conjuntos de datos, es calculando el Coeficiente de Correlación de Pearson entre los dos conjuntos de datos, usando la función de Excel CORREL.
 
@@ -92,7 +92,7 @@ En verde vemos la línea de tendencia del PBI per Cápita, que **aumenta exponen
 ![Gráfico del Índice de Libertad Económica vs. PBI per Cápita](/images/blog/libertad-economica-algunos-numeros/image-12.png)
 *Regresión exponencial del PBI per Cápita en verde, con pendiente positiva.*
 
-Para reducir el efecto de los valores altos en el gráfico anterior, mostramos la misma informacion con una escala logarítimica en el próximo gráfico y se puede observar mejor la correlación positiva entre el grado de libertad económica y el PBI per Cápita de un país.
+Para reducir el efecto de los valores altos en el gráfico anterior, mostramos la misma información con una escala logarítmica en el próximo gráfico y se puede observar mejor la correlación positiva entre el grado de libertad económica y el PBI per Cápita de un país.
 
 ![Gráfico del Índice de Libertad Económica vs. PBI per Cápita en escala logarítmica](/images/blog/libertad-economica-algunos-numeros/image-13.png)
 *Regresión exponencial del PBI per Cápita en verde, con pendiente positiva (escala logarítmica).*
@@ -105,7 +105,7 @@ En este caso, el coeficiente de correlación de Pearson nos da: **0,64**.
 
 ![Cálculo del coeficiente de correlación de Pearson para PBI per Cápita, resultado](/images/blog/libertad-economica-algunos-numeros/image-16.png)
 
-Lo que indica una correlación directamente proporcial **moderada**.
+Lo que indica una correlación directamente proporcional **moderada**.
 
 ---
 

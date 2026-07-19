@@ -10,7 +10,7 @@ const writingIsCurrent = pathname.startsWith('/blog') || /^\/\d{4}\/\d{2}\/\d{2}
       <span>Santiago Varela</span>
     </a>
     <ul>
-      <li><a href={pathname === '/' ? '#work' : '/#work'}>Work</a></li>
+      <li><a href={pathname === '/' ? '#projects' : '/#projects'}>Projects</a></li>
       <li>
         <a href="/blog/" aria-current={writingIsCurrent ? 'page' : undefined}>
           Writing

@@ -1,0 +1,98 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+  number: number;
+}
+
+const { project, number } = Astro.props;
+---
+
+<article class="project-card">
+  <div class="project-meta">
+    <span>{project.year}</span>
+    <span>{String(number).padStart(2, '0')}</span>
+  </div>
+  <h3>{project.title}</h3>
+  <p>{project.description}</p>
+  <ul class="tech-list" aria-label={`Technologies used for ${project.title}`}>
+    {project.tech.slice(0, 6).map((technology) => <li>{technology}</li>)}
+  </ul>
+  {project.links.length > 0 && (
+    <div class="project-links">
+      {project.links.slice(0, 2).map((link) => (
+        <a href={link.href} target="_blank" rel="noopener noreferrer">
+          {link.label} <span aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </div>
+  )}
+</article>
+
+<style>
+  .project-card {
+    min-height: 24rem;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    border-right: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+
+  .project-meta {
+    display: flex;
+    justify-content: space-between;
+    color: var(--color-muted);
+    font: 500 0.73rem/1 var(--font-mono);
+  }
+
+  h3 {
+    font-size: clamp(1.35rem, 2vw, 1.8rem);
+    margin: 2.4rem 0 0.8rem;
+    max-width: 19ch;
+  }
+
+  .project-card > p {
+    color: var(--color-muted);
+    font-size: 0.94rem;
+  }
+
+  .tech-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    list-style: none;
+    padding: 0;
+    margin: auto 0 1.5rem;
+  }
+
+  .tech-list li {
+    padding: 0.28rem 0.55rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    color: var(--color-muted);
+    font: 500 0.7rem/1 var(--font-mono);
+  }
+
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .project-links a {
+    font-size: 0.85rem;
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  @media (max-width: 40rem) {
+    .project-card {
+      min-height: 21rem;
+    }
+  }
+</style>
