@@ -1,0 +1,22 @@
+---
+interface Props {
+  href?: string;
+  target?: string;
+}
+
+const { href, target } = Astro.props;
+const Tag = href ? 'a' : 'div';
+const linkProps = href
+  ? { href, target, rel: target === '_blank' ? 'noopener noreferrer' : undefined }
+  : {};
+---
+
+<Tag class="card" {...linkProps}>
+  <slot />
+</Tag>
+
+<style>
+  .card {
+    padding: 1.25rem 1.4rem;
+  }
+</style>

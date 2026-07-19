@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { getPostPath } from '../../utils/posts';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+---
+
+<BaseLayout title="Writing" description="Technical articles and notes by Santiago Varela.">
+  <header class="page-intro">
+    <p>Writing</p>
+    <h1>Notes from the field.</h1>
+    <div><span>{posts.length} published {posts.length === 1 ? 'article' : 'articles'}</span><span>English & Spanish</span></div>
+  </header>
+
+  <section class="post-list" aria-label="Articles">
+    {posts.map((post, index) => (
+      <a class="post-card" href={getPostPath(post)}>
+        <span class="number">{String(index + 1).padStart(2, '0')}</span>
+        <div>
+          <p class="meta">{dateFormatter.format(post.data.pubDate)} · {post.data.lang.toUpperCase()}</p>
+          <h2>{post.data.title}</h2>
+          <p class="description">{post.data.description}</p>
+        </div>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+    ))}
+  </section>
+</BaseLayout>
+
+<style>
+  .page-intro { padding: clamp(5rem, 10vw, 8rem) 0 4rem; }
+  .page-intro > p { color: var(--color-accent); font: 600 0.76rem/1.3 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; }
+  .page-intro h1 { font-size: clamp(3.25rem, 8vw, 6.5rem); letter-spacing: -0.065em; margin: 1rem 0 2rem; }
+  .page-intro div { display: flex; flex-wrap: wrap; gap: 0.75rem 2rem; color: var(--color-muted); font: 500 0.76rem/1.3 var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em; }
+  .post-list { border-top: 1px solid var(--color-border); margin-bottom: 6rem; }
+  .post-card { display: grid; grid-template-columns: 3rem minmax(0, 1fr) 2rem; gap: 2rem; padding: 2.25rem 0; border-bottom: 1px solid var(--color-border); color: var(--color-text); text-decoration: none; }
+  .number, .meta { color: var(--color-muted); font: 500 0.73rem/1.3 var(--font-mono); text-transform: uppercase; }
+  .meta { margin: 0 0 0.6rem; }
+  h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); letter-spacing: -0.035em; margin: 0 0 0.8rem; }
+  .description { color: var(--color-muted); max-width: 48rem; margin: 0; }
+  .arrow { color: var(--color-accent); font-size: 1.35rem; transition: transform 0.15s ease; }
+  .post-card:hover .arrow { transform: translateX(0.3rem); }
+  @media (max-width: 38rem) { .post-card { grid-template-columns: 1fr 1.5rem; gap: 0.75rem; } .number { grid-column: 1; } .post-card > div { grid-column: 1; } .arrow { grid-column: 2; grid-row: 2; } }
+</style>

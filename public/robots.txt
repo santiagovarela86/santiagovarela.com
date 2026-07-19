@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://santiagovarela.com/sitemap-index.xml

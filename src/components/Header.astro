@@ -1,0 +1,94 @@
+---
+const { pathname } = Astro.url;
+const writingIsCurrent = pathname.startsWith('/blog') || /^\/\d{4}\/\d{2}\/\d{2}\//.test(pathname);
+---
+
+<header>
+  <nav aria-label="Primary navigation">
+    <a class="site-name" href="/" aria-current={pathname === '/' ? 'page' : undefined}>
+      <span class="mark" aria-hidden="true">SV</span>
+      <span>Santiago Varela</span>
+    </a>
+    <ul>
+      <li><a href={pathname === '/' ? '#work' : '/#work'}>Work</a></li>
+      <li>
+        <a href="/blog/" aria-current={writingIsCurrent ? 'page' : undefined}>
+          Writing
+        </a>
+      </li>
+      <li><a href={pathname === '/' ? '#contact' : '/#contact'}>Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<style>
+  header {
+    max-width: var(--measure-wide);
+    margin: 0 auto;
+    padding: 1.25rem var(--page-gutter) 0;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .site-name {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-weight: 700;
+    color: var(--color-text);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+
+  .mark {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.65rem;
+    background: var(--color-text);
+    color: var(--color-bg);
+    font: 700 0.72rem/1 var(--font-mono);
+    letter-spacing: 0.04em;
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  ul a {
+    color: var(--color-muted);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  ul a:hover {
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 34rem) {
+    .site-name > span:last-child {
+      display: none;
+    }
+
+    ul {
+      gap: 0.9rem;
+      font-size: 0.9rem;
+    }
+  }
+
+  a[aria-current='page'] {
+    color: var(--color-text) !important;
+    font-weight: 600;
+  }
+</style>
