@@ -70,6 +70,17 @@ Post body in Markdown. Images go in `public/images/blog/<slug>/` and are referen
 as `/images/blog/<slug>/filename.png`.
 ```
 
+Article pages automatically include **Back to writing** links above and below the
+article, followed by the shared email and LinkedIn contact prompt. For posts around
+1,500 words or longer, add one return link at the nearest natural section break around
+the midpoint:
+
+```html
+<nav class="article-mid-nav" aria-label="Article navigation" lang="en">
+  <a href="/blog/">← Back to writing</a>
+</nav>
+```
+
 Then:
 
 1. `npm run dev` and open the date-based URL shown on the homepage or writing index.

@@ -83,6 +83,10 @@ Poniendo énfasis en que una sociedad libre no elimina por completo la desiguald
 
 ---
 
+<nav class="article-mid-nav" aria-label="Article navigation" lang="en">
+  <a href="/blog/">← Back to writing</a>
+</nav>
+
 **Comparación con otros índices:** Índice de Libertad Económica vs. PBI per Cápita vs. Expectativa de Vida vs. Índice de Desarrollo Humano
 
 Como ya estaba haciendo gráficos, decidí comparar el Índice de Libertad Económica con otras variables, como por ejemplo contra el PBI per Cápita.
