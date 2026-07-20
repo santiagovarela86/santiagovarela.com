@@ -8,6 +8,9 @@ Astro. GitHub pushes to `main` are deployed by Cloudflare Pages.
 - Keep the site static. Do not add a backend, database, comments, or contact forms.
 - Preserve the existing date-based article URLs and legacy redirects.
 - Prefer Astro components and content collections over client-side JavaScript.
+- Preserve the security hardening: SHA-pinned workflow actions, the `public/_headers`
+  security headers, and the `EmailLink` component (never write the contact email
+  verbatim in templates or served HTML). See the README "Security" section.
 
 ## Structure
 
@@ -16,6 +19,7 @@ Astro. GitHub pushes to `main` are deployed by Cloudflare Pages.
 - `src/content/blog/`: Markdown blog posts.
 - `src/content.config.ts`: blog frontmatter schema.
 - `public/images/blog/<slug>/`: images belonging to a blog post.
+- `public/_headers`: security headers applied by Cloudflare Pages.
 
 ## Development and validation
 

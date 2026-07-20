@@ -1,0 +1,28 @@
+# Security headers applied by Cloudflare Pages to every response.
+# Reference: https://developers.cloudflare.com/pages/configuration/headers/
+# See the "Security" section of README.md for the reasoning behind each header.
+
+/*
+  # Stop browsers from guessing ("sniffing") a different content type than the
+  # one declared, which could turn an innocent upload into executable content.
+  X-Content-Type-Options: nosniff
+  # Forbid other sites from embedding this site in an <iframe> (clickjacking).
+  # frame-ancestors in the CSP below is the modern equivalent; this covers old browsers.
+  X-Frame-Options: DENY
+  # Send only the origin (not the full URL) as Referer when navigating to other sites.
+  Referrer-Policy: strict-origin-when-cross-origin
+  # This site never needs these browser capabilities; deny them outright.
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  # Content-Security-Policy: the browser refuses to load or run anything not allowed
+  # here, even if malicious markup somehow ended up in a page.
+  #   default-src 'self'        -> by default, only load resources from this domain
+  #   script-src 'unsafe-inline'-> allow the site's own small inline scripts (theme
+  #                                snippet in BaseLayout, EmailLink assembler, which
+  #                                Astro inlines into the HTML at build time)
+  #   style-src 'unsafe-inline' -> Astro emits some inline style attributes
+  #   img-src 'self' data:      -> our own images plus data: URIs (inline SVG etc.)
+  #   object-src 'none'         -> no Flash/plugins, ever
+  #   base-uri 'self'           -> injected <base> tags can't redirect relative URLs
+  #   form-action 'none'        -> no forms on the site, so forbid all form submits
+  #   frame-ancestors 'none'    -> CSP version of X-Frame-Options: DENY
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests

@@ -1,0 +1,25 @@
+---
+// Renders a mailto link WITHOUT the address appearing verbatim in the served HTML,
+// so spam bots that scrape pages for "user@domain" patterns come up empty.
+// The address is stored reversed in a data attribute and reassembled by the small
+// client script below after the page loads. The frontmatter concatenation runs at
+// build time, so the full address never appears as one string in the source either.
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+const address = 'santiagovarela.86' + '@' + 'gmail' + '.com';
+const reversed = address.split('').reverse().join('');
+---
+
+<a class={className} href="#" data-email={reversed}><slot /></a>
+
+<script>
+  // Astro bundles and dedupes this script, so it runs once per page no matter
+  // how many EmailLink components the page contains.
+  for (const link of document.querySelectorAll<HTMLAnchorElement>('a[data-email]')) {
+    const address = (link.dataset.email ?? '').split('').reverse().join('');
+    link.href = `mailto:${address}`;
+  }
+</script>

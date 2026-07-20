@@ -1,5 +1,6 @@
 ---
-const email = 'santiagovarela.86@gmail.com';
+import EmailLink from './EmailLink.astro';
+
 const linkedInUrl = 'https://www.linkedin.com/in/santiago-v-95715344/';
 const githubUrl = 'https://github.com/santiagovarela86';
 ---
@@ -10,7 +11,7 @@ const githubUrl = 'https://github.com/santiagovarela86';
     <p class="footer-role">Systems Engineer</p>
   </div>
   <div class="footer-meta">
-    <p><a href={`mailto:${email}`}>Email</a> <span aria-hidden="true">·</span> <a href={linkedInUrl} target="_blank" rel="noopener noreferrer">LinkedIn</a> <span aria-hidden="true">·</span> <a href={githubUrl} target="_blank" rel="noopener noreferrer">GitHub</a></p>
+    <p><EmailLink>Email</EmailLink> <span aria-hidden="true">·</span> <a href={linkedInUrl} target="_blank" rel="noopener noreferrer">LinkedIn</a> <span aria-hidden="true">·</span> <a href={githubUrl} target="_blank" rel="noopener noreferrer">GitHub</a></p>
     <p class="copyright">&copy; {new Date().getFullYear()}</p>
   </div>
 </footer>

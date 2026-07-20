@@ -8,6 +8,7 @@ Personal site: profile, contact info, and occasional posts. Built with
 ```text
 /
 ├── public/
+│   ├── _headers                    # security headers served by Cloudflare Pages
 │   ├── favicon.svg / favicon.ico
 │   └── images/blog/<post-slug>/    # images referenced by a post
 ├── src/
@@ -38,19 +39,100 @@ home page was the About post) — there's no separate `/about` route.
 
 ## Deploy
 
-Production deploys run via [GitHub Actions](.github/workflows/deploy.yml) on every push to
-`main` (or manually from the Actions tab). The workflow builds the site and uploads `dist/` to
-the Cloudflare Pages project `santiagovarela-com` using Wrangler Direct Upload.
+This project uses **GitHub Actions → Wrangler Direct Upload**: GitHub builds the site,
+Cloudflare Pages hosts the finished static files.
 
-Repository secrets required:
+```text
+git push main
+      │
+      ▼
+GitHub Actions (.github/workflows/deploy.yml)
+  checkout → npm ci → npm run check (astro build) → dist/
+      │
+      ▼
+wrangler pages deploy dist  (uses CLOUDFLARE_* secrets)
+      │
+      ▼
+Cloudflare Pages project "santiagovarela-com" serves the site worldwide
+```
+
+Triggers: every push to `main`, or manually from the GitHub **Actions** tab
+(`workflow_dispatch`).
+
+What the workflow does:
+
+1. Checks out the repository and installs Node.js 22 (npm cache enabled).
+2. Runs `npm ci` for a clean, lockfile-exact install.
+3. Runs `npm run check` (`astro build`) — validates content-collection frontmatter and
+   writes the static site to `dist/`.
+4. Uploads `dist/` with `wrangler pages deploy`. The build runs in GitHub Actions, so
+   deploys do not consume Cloudflare build minutes and visitors cannot trigger a build.
+
+Repository secrets (Settings → Secrets and variables → Actions):
 
 | Secret | Purpose |
 | :----- | :------ |
-| `CLOUDFLARE_API_TOKEN` | Cloudflare API token with Account → Cloudflare Pages → Edit |
-| `CLOUDFLARE_ACCOUNT_ID` | Your Cloudflare account ID |
+| `CLOUDFLARE_API_TOKEN` | API token scoped to **Account → Cloudflare Pages → Edit** only |
+| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare account ID |
 
-Custom domains (`santiagovarela.com`) are configured in the Cloudflare Pages dashboard, not in
-the workflow.
+Custom domains (`santiagovarela.com`) are attached in the Cloudflare Pages dashboard, not
+in the workflow.
+
+### Updating a pinned action
+
+Third-party actions are pinned to full commit SHAs (see the comment at the top of
+[deploy.yml](.github/workflows/deploy.yml)). Tags like `@v6` can be force-moved; a SHA
+cannot. To upgrade one:
+
+```sh
+git ls-remote https://github.com/actions/checkout refs/tags/v6.2.0
+```
+
+Replace the SHA in `deploy.yml` and update the trailing version comment to match.
+
+## Security
+
+The site is fully static — no backend, no forms, no cookies, no third-party scripts — so
+the attack surface is minimal by design.
+
+### DDoS and traffic costs
+
+You are protected against the "make me pay" scenario on the free Cloudflare Pages plan:
+
+- **Unmetered DDoS mitigation** is included on every Cloudflare plan (including Free).
+  Attack traffic is absorbed at the edge; you are not billed for it.
+- Cloudflare Pages Free documents **unlimited static requests** and **unlimited bandwidth**.
+  Serving HTML/CSS/JS/images from Pages is not a metered billable dimension, so a traffic
+  flood cannot generate an overage invoice the way it can on hosts that charge per GB.
+- Because deploys run in GitHub Actions and only upload finished files, hostile visitors
+  also cannot burn your Cloudflare **build minutes**.
+
+What a flood *can* do is make the site slow or briefly hard to reach for real users while
+Cloudflare mitigates — it should not cost you money. Keep an eye on the Cloudflare
+dashboard Analytics if you ever see a sustained spike; no credit card needs to be on file
+for the free Pages hosting itself.
+
+### Site hardening
+
+- **Secrets** live only as GitHub Actions repository secrets. Nothing sensitive is
+  committed; `.gitignore` excludes `.env*` and the WordPress export XML files.
+- **Pinned actions.** Workflow actions use commit SHAs so a compromised release tag
+  cannot inject code into the build (which has the Cloudflare token).
+- **Security headers** in [public/_headers](public/_headers) are applied by Cloudflare
+  Pages on every response. Each header has an inline comment. Highlights:
+  - `X-Content-Type-Options: nosniff` — browsers must not guess a different content type
+    than the one the server declared (blocks some content-sniffing XSS tricks).
+  - **CSP (Content-Security-Policy)** — a browser allow-list for what the page may load
+    or execute (scripts, images, frames, form targets, etc.). Even if someone somehow
+    injected markup into a page, the browser would refuse disallowed scripts or
+    third-party resources. This site's CSP allows `'unsafe-inline'` scripts/styles
+    because Astro and the theme/email snippets use small inline scripts; with no user
+    input on the site that trade-off is acceptable. See the comments in `_headers`.
+- **Email obfuscation.** The contact address is never written as `user@domain` in the
+  served HTML. [EmailLink](src/components/EmailLink.astro) stores it reversed in a data
+  attribute and a small client script builds the `mailto:` link after load, which stops
+  naive scrapers. Determined harvesters can still reverse it — this is spam reduction,
+  not cryptography.
 
 ## Adding a post
 

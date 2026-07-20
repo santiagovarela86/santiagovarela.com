@@ -13,15 +13,20 @@ permissions:
   contents: read
   deployments: write
 
+# Third-party actions are pinned to full commit SHAs (the trailing comment shows the
+# human-readable version). A tag like "@v6" can be repointed to malicious code if the
+# action's repo is compromised; a commit SHA cannot. To upgrade an action, look up the
+# new release's commit SHA (e.g. `git ls-remote https://github.com/actions/checkout
+# refs/tags/v6.2.0`), replace the SHA, and update the version comment.
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
           node-version: 22
           cache: npm
@@ -33,7 +38,7 @@ jobs:
         run: npm run check
 
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd # v3.15.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
