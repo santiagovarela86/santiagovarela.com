@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import ReturnNavigation from '../../../../components/ReturnNavigation.astro';
-import EmailLink from '../../../../components/EmailLink.astro';
+import CompactContact from '../../../../components/CompactContact.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -19,7 +19,6 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
-const linkedInUrl = 'https://www.linkedin.com/in/santiago-v-95715344/';
 const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 ---
 
@@ -35,13 +34,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
     <div class="article-body"><Content /></div>
   </article>
   <ReturnNavigation href="/blog/" label="Back to writing" placement="bottom" ariaLabel="Article navigation" />
-  <aside class="article-footer">
-    <p>Want to discuss this topic?</p>
-    <div class="article-footer-actions">
-      <EmailLink>Email me →</EmailLink>
-      <a href={linkedInUrl} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-    </div>
-  </aside>
+  <CompactContact prompt="Want to discuss this topic?" />
 </BaseLayout>
 
 <style>
@@ -53,8 +46,4 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
   .article-body :global(p), .article-body :global(li) { color: var(--color-prose); }
   .article-body :global(strong) { color: var(--color-text); }
   .article-body :global(a) { overflow-wrap: anywhere; }
-  .article-footer { margin: 0 0 2rem; padding: 2rem; border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
-  .article-footer p { color: var(--color-muted); margin: 0 0 0.6rem; }
-  .article-footer-actions { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
-  .article-footer-actions :global(a) { font-size: 1.15rem; font-weight: 750; }
 </style>

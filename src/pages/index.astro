@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import EmailLink from '../components/EmailLink.astro';
+import ContactSection from '../components/ContactSection.astro';
 import { getCollection } from 'astro:content';
 import { getPostPath } from '../utils/posts';
 
@@ -162,17 +163,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
     </div>
   </section>
 
-  <section id="contact" class="contact-section">
-    <p class="section-kicker">Contact</p>
-    <div class="contact-content">
-      <h2>Looking for a Systems Engineer?</h2>
-      <p>For professional opportunities or conversations about systems, operations, and reliability, reach me by email or LinkedIn.</p>
-      <div class="contact-actions">
-        <EmailLink>Email <span aria-hidden="true">→</span></EmailLink>
-        <a href={linkedInUrl} target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
-      </div>
-    </div>
-  </section>
+  <ContactSection />
 </BaseLayout>
 
 <style>
@@ -190,7 +181,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
   .hero-facts dd { margin: 0.3rem 0 0; font-weight: 700; }
   .section-rule { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 2rem; padding: 5rem 0; border-top: 1px solid var(--color-border); scroll-margin-top: 1rem; }
   .section-kicker { margin: 0; }
-  .section-content h2, .contact-content h2 { font-size: clamp(2rem, 4vw, 3.35rem); letter-spacing: -0.045em; max-width: 16ch; margin: 0; }
+  .section-content h2 { font-size: clamp(2rem, 4vw, 3.35rem); letter-spacing: -0.045em; max-width: 16ch; margin: 0; }
   .intro-grid { display: grid; grid-template-columns: minmax(15rem, 0.8fr) minmax(18rem, 1.2fr); gap: clamp(2rem, 6vw, 6rem); align-items: start; }
   .intro-copy { color: var(--color-muted); font-size: 1.08rem; max-width: 40rem; }
   .credentials { display: grid; gap: 2rem; margin-top: 2.25rem; }
@@ -214,12 +205,6 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
   .post-title { font-weight: 700; }
   .post-arrow { color: var(--color-accent); font-size: 1.2rem; transition: transform 0.15s ease; }
   .post-row:hover .post-arrow { transform: translateX(0.25rem); }
-  .contact-section { margin: 2rem 0 5rem; padding: clamp(2rem, 5vw, 4rem); background: var(--color-text); color: var(--color-bg); border-radius: var(--radius-lg); display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: 2rem; scroll-margin-top: 1rem; }
-  .contact-section .section-kicker { color: var(--color-contact-accent); }
-  .contact-content p { color: var(--color-contact-muted); max-width: 38rem; margin: 1.25rem 0 2rem; }
-  .contact-content :global(a) { color: var(--color-bg); font-weight: 750; font-size: clamp(1rem, 2.5vw, 1.35rem); text-underline-offset: 0.35rem; }
-  .contact-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.75rem; }
-  .contact-actions :global(a) { overflow-wrap: anywhere; }
   @media (max-width: 52rem) {
     .hero { grid-template-columns: 1fr; min-height: auto; gap: 3.5rem; }
     .hero-facts { display: grid; grid-template-columns: repeat(3, 1fr); }
@@ -243,6 +228,5 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
     .post-title { grid-column: 1; }
     .post-lang { grid-column: 2; grid-row: 1; }
     .post-arrow { grid-column: 2; grid-row: 2; }
-    .contact-section { grid-template-columns: 1fr; padding: 2rem; margin-bottom: 3rem; }
   }
 </style>

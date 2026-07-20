@@ -1,0 +1,25 @@
+---
+import EmailLink from './EmailLink.astro';
+
+interface Props {
+  prompt: string;
+}
+
+const { prompt } = Astro.props;
+const linkedInUrl = 'https://www.linkedin.com/in/santiago-v-95715344/';
+---
+
+<aside class="compact-contact">
+  <p>{prompt}</p>
+  <div class="compact-contact-actions">
+    <EmailLink>Email →</EmailLink>
+    <a href={linkedInUrl} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+  </div>
+</aside>
+
+<style>
+  .compact-contact { margin: 0 0 2rem; padding: 2rem; border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
+  .compact-contact p { color: var(--color-muted); margin: 0 0 0.6rem; }
+  .compact-contact-actions { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+  .compact-contact-actions :global(a) { font-size: 1.15rem; font-weight: 750; }
+</style>

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ReturnNavigation from '../../components/ReturnNavigation.astro';
+import CompactContact from '../../components/CompactContact.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -45,6 +46,7 @@ const { title, year, description, technologies, links } = project.data;
     <div class="project-body"><Content /></div>
   </article>
   <ReturnNavigation href="/projects/" label="Back to projects" placement="bottom" />
+  <CompactContact prompt="Want to discuss this project or its technologies?" />
 </BaseLayout>
 
 <style>

@@ -1,0 +1,31 @@
+---
+import EmailLink from './EmailLink.astro';
+
+const linkedInUrl = 'https://www.linkedin.com/in/santiago-v-95715344/';
+---
+
+<section id="contact" class="contact-section">
+  <p class="section-kicker">Contact</p>
+  <div class="contact-content">
+    <h2>Looking for a Systems Engineer?</h2>
+    <p>For professional opportunities or conversations about systems, operations, and reliability, reach me by email or LinkedIn.</p>
+    <div class="contact-actions">
+      <EmailLink>Email <span aria-hidden="true">→</span></EmailLink>
+      <a href={linkedInUrl} target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-section { margin: 2rem 0 5rem; padding: clamp(2rem, 5vw, 4rem); background: var(--color-text); color: var(--color-bg); border-radius: var(--radius-lg); display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: 2rem; scroll-margin-top: 1rem; }
+  .section-kicker { margin: 0; color: var(--color-contact-accent); font: 600 0.76rem/1.3 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; }
+  .contact-content h2 { font-size: clamp(2rem, 4vw, 3.35rem); letter-spacing: -0.045em; max-width: 16ch; margin: 0; }
+  .contact-content p { color: var(--color-contact-muted); max-width: 38rem; margin: 1.25rem 0 2rem; }
+  .contact-content :global(a) { color: var(--color-bg); font-weight: 750; font-size: clamp(1rem, 2.5vw, 1.35rem); text-underline-offset: 0.35rem; }
+  .contact-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.75rem; }
+  .contact-actions :global(a) { overflow-wrap: anywhere; }
+
+  @media (max-width: 40rem) {
+    .contact-section { grid-template-columns: 1fr; padding: 2rem; margin-bottom: 3rem; }
+  }
+</style>
