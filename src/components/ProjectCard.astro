@@ -1,33 +1,34 @@
 ---
-import type { Project } from '../data/projects';
+import type { CollectionEntry } from 'astro:content';
 
 interface Props {
-  project: Project;
+  project: CollectionEntry<'projects'>;
   number: number;
 }
 
 const { project, number } = Astro.props;
+const { title, year, description, technologies, links } = project.data;
+const projectPath = `/projects/${project.id}/`;
 ---
 
 <article class="project-card">
   <div class="project-meta">
-    <span>{project.year}</span>
+    <span>{year}</span>
     <span>{String(number).padStart(2, '0')}</span>
   </div>
-  <h3>{project.title}</h3>
-  <p>{project.description}</p>
-  <ul class="tech-list" aria-label={`Technologies used for ${project.title}`}>
-    {project.tech.slice(0, 6).map((technology) => <li>{technology}</li>)}
+  <h3><a href={projectPath}>{title}</a></h3>
+  <p>{description}</p>
+  <ul class="tech-list" aria-label={`Technologies used for ${title}`}>
+    {technologies.map((technology) => <li>{technology}</li>)}
   </ul>
-  {project.links.length > 0 && (
-    <div class="project-links">
-      {project.links.slice(0, 2).map((link) => (
+  <div class="project-links">
+    <a href={projectPath}>Read project <span aria-hidden="true">→</span></a>
+    {links.map((link) => (
         <a href={link.href} target="_blank" rel="noopener noreferrer">
           {link.label} <span aria-hidden="true">↗</span>
         </a>
-      ))}
-    </div>
-  )}
+    ))}
+  </div>
 </article>
 
 <style>
@@ -52,6 +53,15 @@ const { project, number } = Astro.props;
     font-size: clamp(1.35rem, 2vw, 1.8rem);
     margin: 2.4rem 0 0.8rem;
     max-width: 19ch;
+  }
+
+  h3 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  h3 a:hover {
+    color: var(--color-accent);
   }
 
   .project-card > p {

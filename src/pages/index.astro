@@ -2,20 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
-import { projects } from '../data/projects';
 import { getPostPath } from '../utils/posts';
 
 const email = 'santiagovarela.86@gmail.com';
 const linkedInUrl = 'https://www.linkedin.com/in/santiago-v-95715344/';
 
-const featuredTitles = new Set([
-  'DevOps Playground',
-  'Coronavirus COVID 19 Tracking Tool',
-  'Distributed Messaging System',
-  'Operating System Simulation',
-]);
-const featuredProjects = projects.filter((project) => featuredTitles.has(project.title));
-const otherProjects = projects.filter((project) => !featuredTitles.has(project.title));
+const featuredProjects = (await getCollection('projects', ({ data }) => !data.draft && data.featured))
+  .sort((a, b) => a.data.order - b.data.order);
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 2);
@@ -107,27 +100,17 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
     <p class="section-kicker">04 / Projects</p>
     <div class="section-content">
       <div class="section-heading">
-        <h2 id="projects-heading">Projects across the stack</h2>
-        <p>A curated selection of hands-on work in infrastructure, software, distributed systems, and automation.</p>
+        <div>
+          <h2 id="projects-heading">Projects across the stack</h2>
+          <p>A curated selection of hands-on work in infrastructure, software, distributed systems, and automation.</p>
+        </div>
+        <a href="/projects/">All projects <span aria-hidden="true">→</span></a>
       </div>
       <div class="project-grid">
         {featuredProjects.map((project, index) => (
           <ProjectCard project={project} number={index + 1} />
         ))}
       </div>
-
-      <details class="archive">
-        <summary>
-          <span class="summary-label summary-label--closed">View {otherProjects.length} more projects</span>
-          <span class="summary-label summary-label--open">Hide additional projects</span>
-          <span class="archive-icon" aria-hidden="true">+</span>
-        </summary>
-        <div class="project-grid project-grid--archive">
-          {otherProjects.map((project, index) => (
-            <ProjectCard project={project} number={index + featuredProjects.length + 1} />
-          ))}
-        </div>
-      </details>
     </div>
   </section>
 
@@ -158,7 +141,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
       <p>For professional opportunities or conversations about operations and reliability, reach me by email or LinkedIn.</p>
       <div class="contact-actions">
         <a href={`mailto:${email}`}>{email} <span aria-hidden="true">→</span></a>
-        <a href={linkedInUrl} target="_blank" rel="noopener noreferrer">Message me on LinkedIn <span aria-hidden="true">↗</span></a>
+        <a href={linkedInUrl} target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
       </div>
     </div>
   </section>
@@ -183,19 +166,9 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
   .intro-grid { display: grid; grid-template-columns: minmax(15rem, 0.8fr) minmax(18rem, 1.2fr); gap: clamp(2rem, 6vw, 6rem); align-items: start; }
   .intro-copy { color: var(--color-muted); font-size: 1.08rem; max-width: 40rem; }
   .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 2.5rem; }
-  .section-heading > p, .writing-heading > div > p { color: var(--color-muted); max-width: 31rem; margin: 0; }
+  .section-heading > div > p { color: var(--color-muted); max-width: 31rem; margin: 0; }
+  .section-heading > a { white-space: nowrap; font-weight: 700; text-decoration: none; }
   .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--color-border); border-left: 1px solid var(--color-border); }
-  .archive { margin-top: 1.25rem; border-bottom: 1px solid var(--color-border); }
-  .archive summary { display: flex; justify-content: space-between; cursor: pointer; padding: 1.1rem 0; font-weight: 700; list-style: none; }
-  .archive summary::-webkit-details-marker { display: none; }
-  .summary-label--open { display: none; }
-  .archive-icon { transition: transform 0.15s ease; }
-  .archive[open] .summary-label--closed { display: none; }
-  .archive[open] .summary-label--open { display: inline; }
-  .archive[open] .archive-icon { transform: rotate(45deg); }
-  .project-grid--archive { margin-bottom: 1.25rem; }
-  .writing-heading > div { display: contents; }
-  .writing-heading > a { white-space: nowrap; font-weight: 700; text-decoration: none; }
   .post-list { border-top: 1px solid var(--color-border); }
   .post-row { display: grid; grid-template-columns: 8rem minmax(0, 1fr) 2rem 1.5rem; gap: 1.25rem; align-items: center; padding: 1.35rem 0; border-bottom: 1px solid var(--color-border); color: var(--color-text); text-decoration: none; }
   .post-date, .post-lang { color: var(--color-muted); font: 500 0.73rem/1 var(--font-mono); text-transform: uppercase; }

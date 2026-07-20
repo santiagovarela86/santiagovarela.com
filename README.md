@@ -11,13 +11,14 @@ Personal site: profile, contact info, and occasional posts. Built with
 │   ├── favicon.svg / favicon.ico
 │   └── images/blog/<post-slug>/    # images referenced by a post
 ├── src/
-│   ├── content.config.ts           # blog collection schema (frontmatter shape)
+│   ├── content.config.ts           # blog and project collection schemas
 │   ├── content/blog/*.md           # posts
-│   ├── data/projects.ts            # structured project list rendered as cards on /
+│   ├── content/projects/*.md       # project metadata and detail-page content
 │   ├── layouts/BaseLayout.astro    # <head>, meta/OG tags, header/footer
-│   ├── components/Header.astro, Footer.astro, Card.astro, Badge.astro, ProjectCard.astro
+│   ├── components/Header.astro, Footer.astro, ProjectCard.astro
 │   └── pages/
 │       ├── index.astro             # homepage — profile/hero + project cards + posts
+│       ├── projects/index.astro, [slug].astro
 │       └── blog/index.astro, [...slug].astro
 └── astro.config.mjs
 ```
@@ -75,5 +76,31 @@ Then:
 2. `npm run build` to confirm the frontmatter passes schema validation.
 3. `git add`, `git commit`, `git push` — GitHub Actions deploys to Cloudflare Pages automatically.
 
-Setting `draft: true` builds the page but excludes it from `/`, `/blog/`, and the
-sitemap, so you can preview a work-in-progress without publishing it.
+Setting `draft: true` prevents the article page from being generated and excludes it
+from `/`, `/blog/`, and the sitemap. Set it to `false` locally when you want to preview
+the final route.
+
+## Adding a project
+
+Create `src/content/projects/<slug>.md` with this frontmatter:
+
+```markdown
+---
+title: "Project title"
+year: 2026
+description: "A concise summary used on cards and in page metadata."
+technologies: ["Technology one", "Technology two"]
+links:
+  - label: "Source code"
+    href: "https://github.com/example/project"
+featured: false
+order: 14
+draft: false
+---
+
+Write the longer project description here.
+```
+
+Projects are sorted by `order`. Featured projects appear on the homepage; every
+published project appears on `/projects/` and receives a `/projects/<slug>/` page.
+Setting `draft: true` excludes the project from all three locations and the sitemap.

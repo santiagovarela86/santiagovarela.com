@@ -17,14 +17,14 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
-const dateFormatter = new Intl.DateTimeFormat(post.data.lang === 'es' ? 'es-AR' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description} prose lang={post.data.lang} type="article">
   <p class="back"><a href="/blog/">← All writing</a></p>
   <article lang={post.data.lang}>
     <header class="article-header">
-      <p class="article-label">{post.data.lang === 'es' ? 'Artículo' : 'Article'} · {post.data.lang.toUpperCase()}</p>
+      <p class="article-label">Article · {post.data.lang.toUpperCase()}</p>
       <h1>{post.data.title}</h1>
       <p class="description">{post.data.description}</p>
       <p class="meta">{dateFormatter.format(post.data.pubDate)} · Santiago Varela</p>
@@ -32,8 +32,8 @@ const dateFormatter = new Intl.DateTimeFormat(post.data.lang === 'es' ? 'es-AR' 
     <div class="article-body"><Content /></div>
   </article>
   <aside class="article-footer">
-    <p>{post.data.lang === 'es' ? '¿Querés conversar sobre este tema?' : 'Want to discuss this topic?'}</p>
-    <a href="mailto:santiagovarela.86@gmail.com">{post.data.lang === 'es' ? 'Escribime' : 'Send me an email'} →</a>
+    <p>Want to discuss this topic?</p>
+    <a href="mailto:santiagovarela.86@gmail.com">Send me an email →</a>
   </aside>
 </BaseLayout>
 

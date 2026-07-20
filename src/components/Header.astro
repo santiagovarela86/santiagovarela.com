@@ -7,12 +7,13 @@ const writingIsCurrent = pathname.startsWith('/blog') || /^\/\d{4}\/\d{2}\/\d{2}
 
 <header>
   <nav aria-label="Primary navigation">
-    <a class="site-name" href="/" aria-current={pathname === '/' ? 'page' : undefined}>
+    <a class="site-name" href="/">
       <span class="mark" aria-hidden="true">SV</span>
       <span>Santiago Varela</span>
     </a>
     <ul>
-      <li><a href={pathname === '/' ? '#projects' : '/#projects'}>Projects</a></li>
+      <li><a href="/" aria-current={pathname === '/' ? 'page' : undefined}>Home</a></li>
+      <li><a href="/projects/" aria-current={pathname.startsWith('/projects') ? 'page' : undefined}>Projects</a></li>
       <li>
         <a href="/blog/" aria-current={writingIsCurrent ? 'page' : undefined}>
           Writing
