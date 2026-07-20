@@ -83,7 +83,7 @@ Poniendo énfasis en que una sociedad libre no elimina por completo la desiguald
 
 ---
 
-<nav class="article-mid-nav" aria-label="Article navigation" lang="en">
+<nav class="return-nav return-nav--middle" aria-label="Article navigation" lang="en">
   <a href="/blog/">← Back to writing</a>
 </nav>
 

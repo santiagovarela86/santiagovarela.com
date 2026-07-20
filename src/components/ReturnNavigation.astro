@@ -1,0 +1,19 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  placement?: 'top' | 'middle' | 'bottom';
+  ariaLabel?: string;
+}
+
+const {
+  href,
+  label,
+  placement = 'top',
+  ariaLabel = 'Page navigation',
+} = Astro.props;
+---
+
+<nav class:list={['return-nav', `return-nav--${placement}`]} aria-label={ariaLabel}>
+  <a href={href}>← {label}</a>
+</nav>

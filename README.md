@@ -76,7 +76,7 @@ article, followed by the shared email and LinkedIn contact prompt. For posts aro
 the midpoint:
 
 ```html
-<nav class="article-mid-nav" aria-label="Article navigation" lang="en">
+<nav class="return-nav return-nav--middle" aria-label="Article navigation" lang="en">
   <a href="/blog/">← Back to writing</a>
 </nav>
 ```

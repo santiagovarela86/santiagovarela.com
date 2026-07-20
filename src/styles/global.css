@@ -115,6 +115,27 @@ button:focus-visible {
   border-radius: 4px;
 }
 
+.return-nav {
+  font-size: 0.9rem;
+}
+
+.return-nav--top {
+  margin-top: 2rem;
+}
+
+.return-nav--middle {
+  margin: 2.5rem 0;
+}
+
+.return-nav--bottom {
+  margin: 3rem 0 1.5rem;
+}
+
+.return-nav a {
+  color: var(--color-muted);
+  text-decoration: none;
+}
+
 h1, h2, h3 {
   line-height: 1.2;
   letter-spacing: -0.01em;
