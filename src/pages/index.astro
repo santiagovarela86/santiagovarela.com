@@ -155,8 +155,11 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
     <p class="section-kicker">06 / Contact</p>
     <div class="contact-content">
       <h2>Looking for an IT Operations Manager?</h2>
-      <p>For professional opportunities or conversations about operations and reliability, email is the best way to reach me.</p>
-      <a href={`mailto:${email}`}>{email} <span aria-hidden="true">→</span></a>
+      <p>For professional opportunities or conversations about operations and reliability, reach me by email or LinkedIn.</p>
+      <div class="contact-actions">
+        <a href={`mailto:${email}`}>{email} <span aria-hidden="true">→</span></a>
+        <a href={linkedInUrl} target="_blank" rel="noopener noreferrer">Message me on LinkedIn <span aria-hidden="true">↗</span></a>
+      </div>
     </div>
   </section>
 </BaseLayout>
@@ -203,6 +206,8 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
   .contact-section .section-kicker { color: var(--color-contact-accent); }
   .contact-content p { color: var(--color-contact-muted); max-width: 38rem; margin: 1.25rem 0 2rem; }
   .contact-content a { color: var(--color-bg); font-weight: 750; font-size: clamp(1rem, 2.5vw, 1.35rem); text-underline-offset: 0.35rem; }
+  .contact-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.75rem; }
+  .contact-actions a { overflow-wrap: anywhere; }
   @media (max-width: 52rem) {
     .hero { grid-template-columns: 1fr; min-height: auto; gap: 3.5rem; }
     .hero-facts { display: grid; grid-template-columns: repeat(3, 1fr); }
