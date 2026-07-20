@@ -24,16 +24,16 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
 
 <BaseLayout
   title="Santiago Varela"
-  description="Santiago Varela is an IT Operations Manager leading SRE, Change Management, and Release Management, with a background as an Information Systems Engineer."
+  description="Santiago Varela is an Information Systems Engineer with 15+ years across electronics, infrastructure, and software — currently leading IT Operations."
 >
   <section class="hero">
     <div class="hero-copy">
       <p class="eyebrow"><span class="status-dot"></span> Information Systems Engineer</p>
-      <h1>Reliable operations. <br /><span>Practical leadership.</span></h1>
+      <h1>Reliable operations. <br /><span>Practical engineering.</span></h1>
       <p class="hero-lede">
-        I lead IT Operations—overseeing Site Reliability, Change Management, and Release
-        Management—combining a hands-on engineering background with a methodical approach
-        to running dependable, well-governed systems.
+        Information Systems Engineer with 15+ years across electronics, infrastructure,
+        and software. These days that background goes into leading IT Operations—but the
+        engineering is still what drives how I work.
       </p>
       <div class="cta-row">
         <a class="button button--primary" href={`mailto:${email}`}>Send me an email <span aria-hidden="true">→</span></a>
@@ -51,40 +51,60 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
   <section class="intro-section section-rule" aria-labelledby="about-heading">
     <p class="section-kicker">01 / About</p>
     <div class="section-content intro-grid">
-      <h2 id="about-heading">From electronics to leading IT Operations.</h2>
+      <h2 id="about-heading">An engineer, first and foremost.</h2>
       <div class="intro-copy">
         <p>
           My career started close to the hardware and moved steadily up the stack: electronics,
           infrastructure administration, operating systems, and cloud platforms.
         </p>
         <p>
-          Today I'm an IT Operations Manager, leading the Site Reliability Engineering,
-          Change Management, and Release Management teams—the SRE team also owns the
-          Incident Management process. That range across layers and disciplines helps me
-          look beyond a single team when things go wrong, and push for durable fixes and
-          automation that make the next incident less likely.
+          That range is still how I approach problems—look past the first layer, question
+          the obvious explanation, and keep digging until the evidence adds up. A couple of
+          the posts below are exactly that instinct in action.
         </p>
       </div>
     </div>
   </section>
 
-  <section class="section-rule" aria-labelledby="expertise-heading">
-    <p class="section-kicker">02 / Expertise</p>
-    <div class="section-content">
-      <div class="section-heading">
-        <h2 id="expertise-heading">What I bring to a team</h2>
-        <p>Broad systems experience, applied with a leader's attention to risk, process, and people.</p>
+  <section class="section-rule" aria-labelledby="role-heading">
+    <p class="section-kicker">02 / Current role</p>
+    <div class="section-content intro-grid">
+      <h2 id="role-heading">IT Operations Management</h2>
+      <div class="intro-copy">
+        <p>
+          I currently work as an IT Operations Manager, overseeing Site Reliability
+          Engineering, Incident Management, and Change and Release Management.
+        </p>
+        <p>
+          It's operational work with an engineer's mindset: durable fixes over quick
+          patches, clear evidence over assumptions, and automation that makes the next
+          incident less likely.
+        </p>
       </div>
-      <div class="expertise-grid">
-        <article><span class="index">01</span><h3>Operations & service management</h3><p>Leading SRE, Change Management, and Release Management to keep services reliable and changes predictable.</p></article>
-        <article><span class="index">02</span><h3>Incident management</h3><p>Owning the incident process end to end—clear escalation, fast resolution, and follow-through on root causes.</p></article>
-        <article><span class="index">03</span><h3>Systems thinking</h3><p>A hands-on background across application, operating-system, network, and hardware layers informs how I diagnose and prioritize.</p></article>
+    </div>
+  </section>
+
+  <section class="section-rule" aria-labelledby="background-heading">
+    <p class="section-kicker">03 / Background</p>
+    <div class="section-content intro-grid">
+      <h2 id="background-heading">15+ years, one layer at a time.</h2>
+      <div class="intro-copy">
+        <p>
+          Electronics and hardware, then infrastructure administration, operating systems,
+          cloud platforms, and eventually software and operations—each layer building on
+          the last.
+        </p>
+        <p>
+          Information Systems Engineering degree from UTN.BA. High-school diploma in
+          Electronics.
+        </p>
+        <p>Certifications: CKA (Certified Kubernetes Administrator) · Azure Expert · ITIL v4.</p>
       </div>
     </div>
   </section>
 
   <section id="projects" class="section-rule" aria-labelledby="projects-heading">
-    <p class="section-kicker">03 / Projects</p>
+    <p class="section-kicker">04 / Projects</p>
     <div class="section-content">
       <div class="section-heading">
         <h2 id="projects-heading">Projects across the stack</h2>
@@ -112,7 +132,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
   </section>
 
   <section id="writing" class="section-rule" aria-labelledby="writing-heading">
-    <p class="section-kicker">04 / Writing</p>
+    <p class="section-kicker">05 / Writing</p>
     <div class="section-content">
       <div class="section-heading writing-heading">
         <div><h2 id="writing-heading">Notes from the field</h2><p>Occasional writing about troubleshooting, systems, and ideas worth examining.</p></div>
@@ -132,9 +152,9 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
   </section>
 
   <section id="contact" class="contact-section">
-    <p class="section-kicker">05 / Contact</p>
+    <p class="section-kicker">06 / Contact</p>
     <div class="contact-content">
-      <h2>Looking for someone to lead IT Operations?</h2>
+      <h2>Looking for an IT Operations Manager?</h2>
       <p>For professional opportunities or conversations about operations and reliability, email is the best way to reach me.</p>
       <a href={`mailto:${email}`}>{email} <span aria-hidden="true">→</span></a>
     </div>
@@ -161,13 +181,6 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
   .intro-copy { color: var(--color-muted); font-size: 1.08rem; max-width: 40rem; }
   .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 2.5rem; }
   .section-heading > p, .writing-heading > div > p { color: var(--color-muted); max-width: 31rem; margin: 0; }
-  .expertise-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
-  .expertise-grid article { padding: 1.75rem 1.5rem 2rem; border-right: 1px solid var(--color-border); }
-  .expertise-grid article:first-child { padding-left: 0; }
-  .expertise-grid article:last-child { border-right: 0; }
-  .expertise-grid .index { color: var(--color-accent); font: 500 0.75rem/1 var(--font-mono); }
-  .expertise-grid h3 { font-size: 1.15rem; margin: 2.5rem 0 0.65rem; }
-  .expertise-grid p { color: var(--color-muted); font-size: 0.93rem; margin: 0; }
   .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--color-border); border-left: 1px solid var(--color-border); }
   .archive { margin-top: 1.25rem; border-bottom: 1px solid var(--color-border); }
   .archive summary { display: flex; justify-content: space-between; cursor: pointer; padding: 1.1rem 0; font-weight: 700; list-style: none; }
@@ -199,10 +212,6 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
     .section-rule { grid-template-columns: 1fr; gap: 1.75rem; }
     .intro-grid { grid-template-columns: 1fr; }
     .section-heading { align-items: start; flex-direction: column; }
-    .expertise-grid { grid-template-columns: 1fr; }
-    .expertise-grid article, .expertise-grid article:first-child { padding: 1.5rem 0; border-right: 0; border-bottom: 1px solid var(--color-border); }
-    .expertise-grid article:last-child { border-bottom: 0; }
-    .expertise-grid h3 { margin-top: 1.25rem; }
   }
   @media (max-width: 40rem) {
     .hero { padding: 4.5rem 0; }

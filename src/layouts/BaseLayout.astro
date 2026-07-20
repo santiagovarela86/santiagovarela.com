@@ -20,6 +20,22 @@ const socialImage = new URL('/og.png', Astro.site);
 <html lang={lang}>
   <head>
     <meta charset="utf-8" />
+    <script is:inline>
+      (() => {
+        const storageKey = 'sv-theme';
+        let theme;
+
+        try {
+          const storedTheme = localStorage.getItem(storageKey);
+          if (storedTheme === 'light' || storedTheme === 'dark') theme = storedTheme;
+        } catch {
+          // Fall back to the operating-system preference when storage is unavailable.
+        }
+
+        theme ??= window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
