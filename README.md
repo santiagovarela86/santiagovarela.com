@@ -35,8 +35,21 @@ home page was the About post) — there's no separate `/about` route.
 | `npm run build`       | Build the production site to `./dist/`, validating post frontmatter |
 | `npm run preview`      | Serve the built `./dist/` locally, exactly as Cloudflare will |
 
-Pushing to `main` on GitHub triggers an automatic Cloudflare Pages build and deploy —
-no manual deploy step.
+## Deploy
+
+Production deploys run via [GitHub Actions](.github/workflows/deploy.yml) on every push to
+`main` (or manually from the Actions tab). The workflow builds the site and uploads `dist/` to
+the Cloudflare Pages project `santiagovarela-com` using Wrangler Direct Upload.
+
+Repository secrets required:
+
+| Secret | Purpose |
+| :----- | :------ |
+| `CLOUDFLARE_API_TOKEN` | Cloudflare API token with Account → Cloudflare Pages → Edit |
+| `CLOUDFLARE_ACCOUNT_ID` | Your Cloudflare account ID |
+
+Custom domains (`santiagovarela.com`) are configured in the Cloudflare Pages dashboard, not in
+the workflow.
 
 ## Adding a post
 
@@ -60,7 +73,7 @@ Then:
 
 1. `npm run dev` and open the date-based URL shown on the homepage or writing index.
 2. `npm run build` to confirm the frontmatter passes schema validation.
-3. `git add`, `git commit`, `git push` — Cloudflare Pages picks it up automatically.
+3. `git add`, `git commit`, `git push` — GitHub Actions deploys to Cloudflare Pages automatically.
 
 Setting `draft: true` builds the page but excludes it from `/`, `/blog/`, and the
 sitemap, so you can preview a work-in-progress without publishing it.

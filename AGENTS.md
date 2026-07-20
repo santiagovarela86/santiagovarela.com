@@ -42,4 +42,5 @@ Keep `draft: true` while a post should remain outside public listings and the si
 
 ## Git conventions
 
-Do not add AI attribution or `Co-Authored-By` trailers to commit messages.
+- Use **single-line commit messages only** — no commit body/description.
+- Do not add AI attribution or `Co-Authored-By` trailers to commit messages.
