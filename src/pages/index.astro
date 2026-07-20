@@ -37,7 +37,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
     <dl class="hero-facts" aria-label="Professional highlights">
       <div><dt>Experience</dt><dd>15+ years</dd></div>
       <div><dt>Focus</dt><dd>Reliability · Incident Management · IT Operations</dd></div>
-      <div><dt>Credentials</dt><dd>CKA · Azure Expert · ITIL v4</dd></div>
+      <div><dt>Certifications</dt><dd>ITIL v4 · CKA · Azure DevOps · Azure Administrator</dd></div>
     </dl>
   </section>
 
@@ -91,7 +91,36 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
           Information Systems Engineering degree from UTN.BA. High-school diploma in
           Electronics.
         </p>
-        <p>Certifications: CKA (Certified Kubernetes Administrator) · Azure Expert · ITIL v4.</p>
+        <div class="credentials">
+          <section class="credential-group" aria-labelledby="current-credentials-heading">
+            <h3 id="current-credentials-heading">Current certifications</h3>
+            <ul class="current-credentials">
+              <li>ITIL v4 Foundation</li>
+              <li>Certified Kubernetes Administrator (CKA)</li>
+              <li>Microsoft Certified: DevOps Engineer Expert</li>
+              <li>Microsoft Certified: Azure Administrator Associate</li>
+            </ul>
+          </section>
+
+          <section class="credential-group credential-group--earlier" aria-labelledby="earlier-credentials-heading">
+            <h3 id="earlier-credentials-heading">Earlier certifications</h3>
+            <ul class="earlier-credentials">
+              <li>MCSA: Windows Server 2012</li>
+              <li>MCSA: Windows Server 2008</li>
+              <li>MCITP: Enterprise Administrator on Windows Server 2008</li>
+              <li>MCTS: Windows 7, Configuration</li>
+              <li>MCTS: Windows Server 2008 Applications Infrastructure, Configuration</li>
+              <li>MCTS: Windows Server 2008 Network Infrastructure, Configuration</li>
+              <li>MCTS: Windows Server 2008 Active Directory, Configuration</li>
+              <li>Cisco Certified Network Associate (CCNA)</li>
+            </ul>
+          </section>
+
+          <section class="credential-recognition" aria-labelledby="recognition-heading">
+            <h3 id="recognition-heading">Recognition</h3>
+            <p>Microsoft Top 5% Active Professional <span>2011 · 2013 · 2014</span></p>
+          </section>
+        </div>
       </div>
     </div>
   </section>
@@ -165,6 +194,17 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
   .section-content h2, .contact-content h2 { font-size: clamp(2rem, 4vw, 3.35rem); letter-spacing: -0.045em; max-width: 16ch; margin: 0; }
   .intro-grid { display: grid; grid-template-columns: minmax(15rem, 0.8fr) minmax(18rem, 1.2fr); gap: clamp(2rem, 6vw, 6rem); align-items: start; }
   .intro-copy { color: var(--color-muted); font-size: 1.08rem; max-width: 40rem; }
+  .credentials { display: grid; gap: 2rem; margin-top: 2.25rem; }
+  .credential-group h3, .credential-recognition h3 { margin: 0 0 0.8rem; color: var(--color-text); font: 600 0.75rem/1.3 var(--font-mono); letter-spacing: 0.07em; text-transform: uppercase; }
+  .current-credentials, .earlier-credentials { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem 1.75rem; margin: 0; padding: 0; list-style: none; font-size: 0.9rem; line-height: 1.45; }
+  .current-credentials { color: var(--color-text); font-weight: 600; }
+  .credential-group--earlier { padding-top: 0.15rem; }
+  .earlier-credentials { color: var(--color-muted); }
+  .current-credentials li, .earlier-credentials li { position: relative; padding-left: 0.9rem; }
+  .current-credentials li::before, .earlier-credentials li::before { position: absolute; left: 0; color: var(--color-border); content: "·"; }
+  .credential-recognition { padding-top: 1.1rem; border-top: 1px solid var(--color-border); }
+  .credential-recognition p { margin: 0; color: var(--color-muted); font-size: 0.9rem; }
+  .credential-recognition span { white-space: nowrap; }
   .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 2.5rem; }
   .section-heading > div > p { color: var(--color-muted); max-width: 31rem; margin: 0; }
   .section-heading > a { white-space: nowrap; font-weight: 700; text-decoration: none; }
@@ -197,6 +237,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
     .hero-facts { grid-template-columns: 1fr; }
     .hero-facts div, .hero-facts div:first-child { padding: 0.9rem 0; border-right: 0; }
     .section-rule { padding: 4rem 0; }
+    .current-credentials, .earlier-credentials { grid-template-columns: 1fr; }
     .project-grid { grid-template-columns: 1fr; }
     .post-row { grid-template-columns: 1fr auto; gap: 0.45rem 1rem; }
     .post-date { grid-column: 1; }
