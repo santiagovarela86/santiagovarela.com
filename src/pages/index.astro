@@ -8,7 +8,7 @@ const email = 'santiagovarela.86@gmail.com';
 const linkedInUrl = 'https://www.linkedin.com/in/santiago-v-95715344/';
 
 const featuredProjects = (await getCollection('projects', ({ data }) => !data.draft && data.featured))
-  .sort((a, b) => a.data.order - b.data.order);
+  .sort((a, b) => b.data.year - a.data.year || a.data.order - b.data.order);
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 2);
@@ -17,14 +17,14 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
 
 <BaseLayout
   title="Santiago Varela"
-  description="Santiago Varela is an Information Systems Engineer with 15+ years across electronics, infrastructure, and software — currently leading IT Operations."
+  description="Santiago Varela is a Systems Engineer with 15+ years across electronics, infrastructure, and software — currently leading IT Operations."
 >
   <section class="hero">
     <div class="hero-copy">
-      <p class="eyebrow"><span class="status-dot"></span> Information Systems Engineer</p>
+      <p class="eyebrow"><span class="status-dot"></span> Systems Engineer</p>
       <h1>Reliable operations. <br /><span>Practical engineering.</span></h1>
       <p class="hero-lede">
-        Information Systems Engineer with 15+ years across electronics, infrastructure,
+        Systems Engineer with 15+ years across electronics, infrastructure,
         and software. These days that background goes into leading IT Operations—but the
         engineering is still what drives how I work.
       </p>
@@ -137,8 +137,8 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
   <section id="contact" class="contact-section">
     <p class="section-kicker">06 / Contact</p>
     <div class="contact-content">
-      <h2>Looking for an IT Operations Manager?</h2>
-      <p>For professional opportunities or conversations about operations and reliability, reach me by email or LinkedIn.</p>
+      <h2>Looking for a Systems Engineer?</h2>
+      <p>For professional opportunities or conversations about systems, operations, and reliability, reach me by email or LinkedIn.</p>
       <div class="contact-actions">
         <a href={`mailto:${email}`}>{email} <span aria-hidden="true">→</span></a>
         <a href={linkedInUrl} target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>

@@ -101,6 +101,7 @@ draft: false
 Write the longer project description here.
 ```
 
-Projects are sorted by `order`. Featured projects appear on the homepage; every
-published project appears on `/projects/` and receives a `/projects/<slug>/` page.
+Projects are sorted newest-first by `year`, with `order` used to break ties within
+the same year. Featured projects appear on the homepage; every published project
+appears on `/projects/` and receives a `/projects/<slug>/` page.
 Setting `draft: true` excludes the project from all three locations and the sitemap.

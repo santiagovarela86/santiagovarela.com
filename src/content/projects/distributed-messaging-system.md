@@ -10,7 +10,7 @@ links:
     href: "https://github.com/santiagovarela86/iasc-grupo-3/blob/master/Cliente/lib/cliente/cliente.ex"
   - label: "router.ex"
     href: "https://github.com/santiagovarela86/iasc-grupo-3/blob/master/Router/lib/router/router.ex"
-featured: true
+featured: false
 order: 3
 draft: false
 ---
